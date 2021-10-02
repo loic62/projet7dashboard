@@ -1,3 +1,4 @@
 Streamlit==0.83.0
 numpy==1.19.5
 pandas==1.2.5
+sklearn
