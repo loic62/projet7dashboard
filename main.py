@@ -53,7 +53,7 @@ cols[3].write(f'Max souf Moy: {bacmo}')
 
 my_expander = st.beta_expander(label='Probabilité de défaut: facteurs influents')
 with my_expander:
-    st.image("SHAP.png", width=None)
+    st.image("SHAP.PNG", width=None)
     clicked = st.button('Click me!')
 
 # importer le model
