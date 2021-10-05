@@ -51,7 +51,7 @@ cols[1].write(f'Dettes ext. Moy: {bacsd}')
 cols[2].write(f'Max souf: {atest.iloc[idClient]["B_AMT_CREDIT_MAX_OVERDUE"]}')
 cols[3].write(f'Max souf Moy: {bacmo}')
 
-my_expander = st.beta_expander(label='Probabilité de défaut: facteurs influents')
+my_expander = st.beta_expander(label='Facteurs influents')
 with my_expander:
     st.image("SHAP.PNG", width=None)
     clicked = st.button('Click me!')
@@ -61,12 +61,12 @@ model = pickle.load(open('rf_for_deployment','rb'))
 
 # Prévision : appliquer le modèle sur le client choisi
 prev = model.predict(pd.DataFrame(atest_encoded, index=[idClient]))
+proba = model.predict_proba(pd.DataFrame(atest_encoded, index=[idClient]))[0][prev[0]].round(4)
 
 st.subheader('Prévision de défaut de crédit')
-if prev[0] == 1:
+if proba > 0.507:        # 0.507 : Seuil optimal
     st.write("Défaut")
 else:
     st.write("Sans Défaut")
-proba = model.predict_proba(pd.DataFrame(atest_encoded, index=[idClient]))[0][prev[0]].round(4)
-st.write("Probabilité :", proba)
 
+st.write("Probabilité :", proba)
