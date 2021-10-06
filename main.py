@@ -64,7 +64,7 @@ prev = model.predict(pd.DataFrame(atest_encoded, index=[idClient]))
 proba = model.predict_proba(pd.DataFrame(atest_encoded, index=[idClient]))[0][prev[0]].round(4)
 
 st.subheader('Prévision de défaut de crédit')
-if proba > 0.507:        # 0.507 : Seuil optimal
+if proba > 0.6765:        # 0.6765 : Seuil optimal
     st.write("Défaut")
 else:
     st.write("Sans Défaut")
