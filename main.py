@@ -35,9 +35,8 @@ cols[3].write(f'Type Education: {atest.iloc[idClient]["NAME_EDUCATION_TYPE"]}')
 
 cols = st.beta_columns(4)
 cols[0].write(f'Voiture: {atest.iloc[idClient]["FLAG_OWN_CAR"]}')
-cols[1].write(f'Proprio: {atest.iloc[idClient]["FLAG_OWN_REALTY_Y"]}')
-cols[2].write(f'Type Revenu: {atest.iloc[idClient]["NAME_INCOME_TYPE"]}')
-cols[3].write(f'Revenu: {atest.iloc[idClient]["AMT_INCOME_TOTAL"]}')
+cols[1].write(f'Type Revenu: {atest.iloc[idClient]["NAME_INCOME_TYPE"]}')
+cols[2].write(f'Revenu: {atest.iloc[idClient]["AMT_INCOME_TOTAL"]}')
 
 st.subheader('Crédit')
 cols = st.beta_columns(4)
