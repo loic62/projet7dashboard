@@ -35,8 +35,9 @@ cols[3].write(f'Type Education: {atest.iloc[idClient]["NAME_EDUCATION_TYPE"]}')
 
 cols = st.beta_columns(4)
 cols[0].write(f'Voiture: {atest.iloc[idClient]["FLAG_OWN_CAR"]}')
-cols[1].write(f'Type Revenu: {atest.iloc[idClient]["NAME_INCOME_TYPE"]}')
-cols[2].write(f'Revenu: {atest.iloc[idClient]["AMT_INCOME_TOTAL"]}')
+cols[1].write(f'Proprio: {atest.iloc[idClient]["FLAG_OWN_REALTY_Y"]}')
+cols[2].write(f'Type Revenu: {atest.iloc[idClient]["NAME_INCOME_TYPE"]}')
+cols[3].write(f'Revenu: {atest.iloc[idClient]["AMT_INCOME_TOTAL"]}')
 
 st.subheader('Crédit')
 cols = st.beta_columns(4)
@@ -50,6 +51,9 @@ cols[0].write(f'Dettes ext.: {int(atest.iloc[idClient]["B_AMT_CREDIT_SUM_DEBT"])
 cols[1].write(f'Dettes ext. Moy: {bacsd}')
 cols[2].write(f'Max souf: {atest.iloc[idClient]["B_AMT_CREDIT_MAX_OVERDUE"]}')
 cols[3].write(f'Max souf Moy: {bacmo}')
+cols = st.beta_columns(4)
+cols[0].write(f'Max DPD.: {int(atest.iloc[idClient]["BB_MAX_STATUS"])}')
+cols[1].write(f'MAX DPD Moy: {bbms}')
 
 my_expander = st.beta_expander(label='Facteurs influents')
 with my_expander:
@@ -63,10 +67,13 @@ model = pickle.load(open('rf_for_deployment','rb'))
 prev = model.predict(pd.DataFrame(atest_encoded, index=[idClient]))
 proba = model.predict_proba(pd.DataFrame(atest_encoded, index=[idClient]))[0][prev[0]].round(4)
 
-st.subheader('Prévision de défaut de crédit')
-if proba > 0.55:        # Seuil optimal
+st.subheader('Prévision de défaut de crédit')   # seuil opt=0.55
+if proba > 0.55:
     st.write("Défaut")
 else:
     st.write("Sans Défaut")
 
-st.write("Probabilité :", proba)
+cols = st.beta_columns(2)
+cols[0].write(f'Probabilité: {proba}')
+cols[1].write(f'Client considéré en défaut si proba > 0.55')
+
