@@ -24,6 +24,7 @@ bacmo = int(at['B_AMT_CREDIT_MAX_OVERDUE'].mean())
 baa = at['B_AMT_ANNUITY'].mean()
 cfm = at['CNT_FAM_MEMBERS'].mean()
 bbms = at['BB_MAX_STATUS'].mean()
+bbms = round(bbms,2)
 
 # Affichage données client :
 st.subheader('Informations client')
